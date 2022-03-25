@@ -5,7 +5,7 @@ const geoip = require('geoip-lite');
 const app = express()
 app.use(requestIp.mw())
 app.use(express.json())
-app.set('trust proxy', true) // trust first proxy
+app.set('trust proxy', true)
 
 
 app.get("/*",async (req, res) =>{
@@ -22,11 +22,8 @@ app.get("/*",async (req, res) =>{
 })
 
 async function textOverlay(text) {
-    // Reading image
     const image = await Jimp.read('./tmp/IMG.jpg');
-    // Defining the text font
     const font = await Jimp.loadFont(Jimp.FONT_SANS_64_BLACK);
-
     image.print(
         font,
         0,
@@ -40,7 +37,6 @@ async function textOverlay(text) {
         image.getHeight()
     );
     console.log(image.getWidth())
-    // Writing image after processing
     return image
 }
 module.exports = app
